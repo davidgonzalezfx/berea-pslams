@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Los títulos musicales de los Salmos</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: { serif: ['Newsreader', 'Georgia', 'serif'] },
+      colors: {
+        paper: '#faf9f7',
+        ink: '#1e293b',
+        inksoft: '#475569',
+        ochre: '#a16207',
+        ochresoft: '#f2ead8',
+        hairline: '#e3ded4'
+      }
+    }
+  }
+}
+</script>
+<style>
+  body { font-family: 'Newsreader', Georgia, serif; }
+  .smallcaps { font-variant: small-caps; letter-spacing: 0.08em; }
+  @media print {
+    .no-print { display: none; }
+    body { background: #ffffff; }
+  }
+</style>
+<link rel="stylesheet" href="nav.css">
+</head>
+<body class="bg-paper text-ink antialiased">
+<div id="nav-root"></div>
+
+<div class="max-w-[1100px] mx-auto px-8 py-10">
+
+  <!-- ============ ENCABEZADO ============ -->
+  <header class="border-b-2 border-ink pb-5 mb-6">
+    <h1 class="text-4xl font-semibold tracking-tight leading-tight">Los títulos musicales de los Salmos</h1>
+    <p class="mt-2 text-lg text-inksoft italic">Glosario de las indicaciones de los títulos (superscripciones)</p>
+    <p class="mt-2 text-[15px] text-inksoft leading-relaxed">Hoja de estudio independiente — material recomendado por el profesor para estudiarse por separado.</p>
+  </header>
+
+  <!-- ============ NOTA: QUÉ SEÑALAN LAS INDICACIONES ============ -->
+  <section class="mb-8 border border-hairline bg-white px-5 py-4">
+    <p class="text-[15px] leading-relaxed text-inksoft">
+      <span class="smallcaps font-semibold text-ink text-[14px]">Nota:</span>
+      las indicaciones pueden señalar la <span class="font-semibold text-ochre">ocasión</span> (Salmos 30, 90, 92),
+      el <span class="font-semibold text-ochre">tipo</span> (<span class="italic">siggaion</span>, <span class="italic">mictam</span>, <span class="italic">masquil</span>)
+      o el <span class="font-semibold text-ochre">instrumento</span> (Salmo 4, Salmo 9).
+      Además, muchos salmos se cantaban con <span class="font-semibold text-ochre">melodías prestadas</span> de canciones conocidas.
+    </p>
+  </section>
+
+  <!-- ============ GLOSARIO ============ -->
+  <main>
+
+    <!-- Grupo: tipo -->
+    <section class="mb-7">
+      <h2 class="smallcaps text-ochre font-semibold text-[15px] border-b border-hairline pb-1.5 mb-3">Tipo de composición</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8">
+        <div class="py-2 border-b border-hairline">
+          <p class="text-[16px]"><span class="italic font-medium text-ochre">Mismar</span> — <span class="text-inksoft">canto o composición cantada con instrumento punteado.</span></p>
+        </div>
+        <div class="py-2 border-b border-hairline">
+          <p class="text-[16px]"><span class="italic font-medium text-ochre">Masquil</span> — <span class="text-inksoft">sabiduría / instrucción (sapiencial, meditativo).</span></p>
+          <div class="mt-1 flex flex-wrap gap-1">
+            <span class="text-[11px] px-1.5 py-0.5 border border-hairline text-inksoft">Sal 32</span>
+            <span class="text-[11px] px-1.5 py-0.5 border border-hairline text-inksoft">Sal 42</span>
+            <span class="text-[11px] px-1.5 py-0.5 border border-hairline text-inksoft">Sal 44</span>
+            <span class="text-[11px] px-1.5 py-0.5 border border-hairline text-inksoft">Sal 45</span>
+            <span class="text-[11px] px-1.5 py-0.5 border border-hairline text-inksoft">Sal 52</span>
+            <span class="text-[11px] px-1.5 py-0.5 border border-hairline text-inksoft">Sal 55</span>
+            <span class="text-[11px] px-1.5 py-0.5 border border-hairline text-inksoft">Sal 78</span>
+            <span class="text-[11px] px-1.5 py-0.5 border border-hairline text-inksoft">Sal 88</span>
+            <span class="text-[11px] px-1.5 py-0.5 border border-hairline text-inksoft">Sal 89</span>
+          </div>
+        </div>
+        <div class="py-2 border-b border-hairline">
+          <p class="text-[16px]"><span class="italic font-medium text-ochre">Mictam</span> — <span class="text-inksoft">significado incierto; «oración en voz baja», inscripción o canto grabado.</span></p>
+        </div>
+        <div class="py-2 border-b border-hairline">
+          <p class="text-[16px]"><span class="italic font-medium text-ochre">Sigayón</span> — <span class="text-inksoft">lamento fuerte (posiblemente relacionado con «aullar»).</span></p>
+        </div>
+        <div class="py-2 border-b border-hairline">
+          <p class="text-[16px]"><span class="italic font-medium text-ochre">Higaion</span> — <span class="text-inksoft">«sordina»; bajada del tono de voz.</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Grupo: instrumento -->
+    <section class="mb-7">
+      <h2 class="smallcaps text-ochre font-semibold text-[15px] border-b border-hairline pb-1.5 mb-3">Indicaciones de instrumento</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8">
+        <div class="py-2 border-b border-hairline">
+          <p class="text-[16px]"><span class="italic font-medium text-ochre">Sobre Neginot / Nejinot</span> — <span class="text-inksoft">instrumentos de cuerda.</span></p>
+          <div class="mt-1 flex flex-wrap gap-1">
+            <span class="text-[11px] px-1.5 py-0.5 border border-hairline text-inksoft">Sal 4</span>
+          </div>
+        </div>
+        <div class="py-2 border-b border-hairline">
+          <p class="text-[16px]"><span class="italic font-medium text-ochre">Sobre Nehilot</span> — <span class="text-inksoft">«para flautas» / instrumentos de viento.</span></p>
+        </div>
+        <div class="py-2 border-b border-hairline">
+          <p class="text-[16px]"><span class="italic font-medium text-ochre">Sobre Alamot</span> — <span class="text-inksoft">incierto; oboes, voces de tono alto («notas altas de las doncellas»).</span></p>
+        </div>
+        <div class="py-2 border-b border-hairline">
+          <p class="text-[16px]"><span class="italic font-medium text-ochre">Sobre Gitit</span> — <span class="text-inksoft">instrumento o melodía filistea.</span></p>
+          <div class="mt-1 flex flex-wrap gap-1">
+            <span class="text-[11px] px-1.5 py-0.5 border border-hairline text-inksoft">Sal 84</span>
+            <span class="text-[11px] px-1.5 py-0.5 border border-hairline text-inksoft">«al músico principal sobre Gitit»</span>
+          </div>
+        </div>
+        <div class="py-2 border-b border-hairline">
+          <p class="text-[16px]"><span class="italic font-medium text-ochre">Sobre Seminit</span> — <span class="text-inksoft">octava; instrumento de ocho cuerdas.</span></p>
+        </div>
+        <div class="py-2 border-b border-hairline">
+          <p class="text-[16px]"><span class="italic font-medium text-ochre">Sobre Mahalath</span> — <span class="text-inksoft">«para la enfermedad» / «en coro».</span></p>
+          <div class="mt-1 flex flex-wrap gap-1">
+            <span class="text-[11px] px-1.5 py-0.5 border border-hairline text-inksoft">Sal 53</span>
+            <span class="text-[11px] px-1.5 py-0.5 border border-hairline text-inksoft">Sal 88</span>
+          </div>
+        </div>
+        <div class="py-2 border-b border-hairline">
+          <p class="text-[16px]"><span class="italic font-medium text-ochre">Sobre Mut Laben</span> — <span class="text-inksoft">«con instrumentos de música».</span></p>
+          <div class="mt-1 flex flex-wrap gap-1">
+            <span class="text-[11px] px-1.5 py-0.5 border border-hairline text-inksoft">Sal 9</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Grupo: melodías prestadas -->
+    <section class="mb-7">
+      <h2 class="smallcaps text-ochre font-semibold text-[15px] border-b border-hairline pb-1.5 mb-3">Melodías prestadas</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8">
+        <div class="py-2 border-b border-hairline">
+          <p class="text-[16px]"><span class="italic font-medium text-ochre">Ajelet Sahar</span> — <span class="text-inksoft">«la gacela de la aurora»: melodía prestada.</span></p>
+          <div class="mt-1 flex flex-wrap gap-1">
+            <span class="text-[11px] px-1.5 py-0.5 border border-hairline text-inksoft">Sal 22</span>
+          </div>
+        </div>
+        <div class="py-2 border-b border-hairline">
+          <p class="text-[16px]"><span class="font-medium text-ochre">«La paloma silenciosa en paraje muy distante»</span> — <span class="text-inksoft">melodía prestada.</span></p>
+          <div class="mt-1 flex flex-wrap gap-1">
+            <span class="text-[11px] px-1.5 py-0.5 border border-hairline text-inksoft">Sal 56</span>
+          </div>
+        </div>
+        <div class="py-2 border-b border-hairline">
+          <p class="text-[16px]"><span class="font-medium text-ochre">«La muerte del hijo»</span> — <span class="text-inksoft">melodía prestada.</span></p>
+          <div class="mt-1 flex flex-wrap gap-1">
+            <span class="text-[11px] px-1.5 py-0.5 border border-hairline text-inksoft">Sal 9</span>
+          </div>
+        </div>
+        <div class="py-2 border-b border-hairline">
+          <p class="text-[16px]"><span class="font-medium text-ochre">«La canción del lagar»</span> — <span class="text-inksoft">melodía prestada.</span></p>
+          <div class="mt-1 flex flex-wrap gap-1">
+            <span class="text-[11px] px-1.5 py-0.5 border border-hairline text-inksoft">Sal 8</span>
+          </div>
+        </div>
+        <div class="py-2 border-b border-hairline">
+          <p class="text-[16px]"><span class="italic font-medium text-ochre">«No destruyas» (Al-tashjet)</span> — <span class="text-inksoft">palabras iniciales de un canto cuya melodía se tomaba prestada.</span></p>
+        </div>
+        <div class="py-2 border-b border-hairline">
+          <p class="text-[16px]"><span class="font-medium text-ochre">«Sobre lirios»</span> — <span class="text-inksoft">testimonio; melodía prestada.</span></p>
+          <div class="mt-1 flex flex-wrap gap-1">
+            <span class="text-[11px] px-1.5 py-0.5 border border-hairline text-inksoft">Sal 45</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Grupo: otros -->
+    <section class="mb-8">
+      <h2 class="smallcaps text-ochre font-semibold text-[15px] border-b border-hairline pb-1.5 mb-3">Otros títulos e indicaciones</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8">
+        <div class="py-2 border-b border-hairline">
+          <p class="text-[16px]"><span class="italic font-medium text-ochre">Selah</span> — <span class="text-inksoft">pausa reflexiva (aparece, p. ej., marcando las tres estrofas del Salmo 46).</span></p>
+        </div>
+        <div class="py-2 border-b border-hairline">
+          <p class="text-[16px]"><span class="italic font-medium text-ochre">Jedutún</span> — <span class="text-inksoft">atribución al músico levita Jedutún.</span></p>
+          <div class="mt-1 flex flex-wrap gap-1">
+            <span class="text-[11px] px-1.5 py-0.5 border border-hairline text-inksoft">Sal 39</span>
+            <span class="text-[11px] px-1.5 py-0.5 border border-hairline text-inksoft">Sal 62</span>
+            <span class="text-[11px] px-1.5 py-0.5 border border-hairline text-inksoft">Sal 77</span>
+          </div>
+        </div>
+        <div class="py-2 border-b border-hairline">
+          <p class="text-[16px]"><span class="font-medium text-ochre">Al músico principal / al director musical</span> — <span class="text-inksoft">indicación dirigida al director de la música del templo.</span></p>
+        </div>
+        <div class="py-2 border-b border-hairline">
+          <p class="text-[16px]"><span class="font-medium text-ochre">Gradual</span> — <span class="text-inksoft">«de las subidas»: cantos de peregrinaje.</span></p>
+          <div class="mt-1 flex flex-wrap gap-1">
+            <span class="text-[11px] px-1.5 py-0.5 border border-hairline text-inksoft">Sal 120–134</span>
+          </div>
+        </div>
+        <div class="py-2 border-b border-hairline">
+          <p class="text-[16px]"><span class="italic font-medium text-ochre">Tejilim</span> — <span class="text-inksoft">el título hebreo del libro: «alabanzas».</span></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ INSTRUMENTOS DEL TEMPLO ============ -->
+  <section class="border-t-2 border-ink pt-5 mt-2">
+    <h2 class="text-2xl font-semibold tracking-tight mb-1">Los instrumentos del templo</h2>
+    <p class="text-[15px] text-inksoft italic mb-4">Pequeña taxonomía de las tres familias instrumentales.</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <!-- Cuerda -->
+      <div class="border border-hairline bg-white px-4 py-3">
+        <h3 class="smallcaps text-ochre font-semibold text-[15px] border-b border-hairline pb-1 mb-2">Cuerda</h3>
+        <ul class="text-[15px] text-inksoft leading-relaxed list-none space-y-0.5">
+          <li><span class="italic">Salterio</span></li>
+          <li><span class="italic">Lira</span></li>
+          <li><span class="italic">Cítara</span></li>
+          <li><span class="italic">Decacordio</span> (10 cuerdas)</li>
+          <li><span class="italic">Sambuca</span></li>
+          <li><span class="italic">Arpa</span></li>
+        </ul>
+      </div>
+
+      <!-- Percusión -->
+      <div class="border border-hairline bg-white px-4 py-3">
+        <h3 class="smallcaps text-ochre font-semibold text-[15px] border-b border-hairline pb-1 mb-2">Percusión</h3>
+        <ul class="text-[15px] text-inksoft leading-relaxed list-none space-y-0.5">
+          <li><span class="italic">Tamboril</span> (tímpano, pandero, tambor)</li>
+          <li><span class="italic">Símbalos</span></li>
+        </ul>
+      </div>
+
+      <!-- Viento -->
+      <div class="border border-hairline bg-white px-4 py-3">
+        <h3 class="smallcaps text-ochre font-semibold text-[15px] border-b border-hairline pb-1 mb-2">Viento</h3>
+        <ul class="text-[15px] text-inksoft leading-relaxed list-none space-y-0.5">
+          <li><span class="italic">Flautas</span>:
+            <ul class="ml-4 mt-0.5 space-y-0.5">
+              <li>de una caña, con agujeros = melodía;</li>
+              <li>de dos cañas paralelas = armonía.</li>
+            </ul>
+          </li>
+          <li class="pt-0.5"><span class="italic">Trompetas</span>: cuerno de carnero o cabra; trompetas metálicas rectas (cf. Números 10).</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Dato -->
+    <p class="mt-4 text-[15px] text-inksoft">
+      <span class="smallcaps text-ochre font-semibold text-[14px]">Dato:</span>
+      38.000 levitas fueron asignados al servicio del templo.
+    </p>
+  </section>
+
+  <footer class="mt-10 pt-4 border-t border-hairline text-[12px] text-inksoft">
+    Hoja de estudio — Curso sobre los Salmos · Los títulos musicales (superscripciones) · Impresión recomendada
+  </footer>
+
+</div>
+
+<script src="nav.js"></script>
+</body>
+</html>

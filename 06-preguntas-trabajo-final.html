@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preguntas del trabajo final — Salmos</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap" rel="stylesheet">
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          paper: '#faf9f7',
+          ink: '#1e293b',
+          ochre: '#a16207',
+          ochredeep: '#854d0e'
+        },
+        fontFamily: {
+          serif: ['"Source Serif 4"', 'Georgia', 'serif'],
+          sans: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif']
+        }
+      }
+    }
+  }
+</script>
+<style>
+  body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .label {
+    font-size: 0.625rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .answer { display: none; }
+  .answer.open { display: block; }
+  .answer ul { list-style: disc; padding-left: 1.25rem; margin: 0 0 0.5rem; }
+  .answer li { margin-bottom: 0.25rem; }
+  .answer p { margin: 0 0 0.5rem; }
+  .answer .note { color: #737373; font-size: 0.8rem; }
+  .chip[aria-pressed="true"] { background: #1e293b; color: #faf9f7; border-color: #1e293b; }
+  @media print {
+    .no-print { display: none !important; }
+    body { background: #ffffff; }
+    .answer { display: block !important; }
+    .card { break-inside: avoid; }
+  }
+</style>
+<link rel="stylesheet" href="nav.css">
+</head>
+<body class="bg-paper text-ink font-sans antialiased">
+<div id="nav-root"></div>
+
+<div class="max-w-[900px] mx-auto px-6 md:px-8 py-10">
+
+  <!-- ============ ENCABEZADO ============ -->
+  <header class="border-b border-neutral-200 pb-6 mb-6">
+    <p class="label text-ochre mb-3">Curso bíblico &middot; Trabajo final</p>
+    <h1 class="font-serif font-bold text-4xl md:text-5xl leading-tight text-ink">Preguntas del trabajo final</h1>
+    <p class="font-serif italic text-lg text-neutral-600 mt-2">59 preguntas, su tipo y su respuesta</p>
+    <p class="text-sm text-neutral-600 mt-4 max-w-3xl">Basado en los transcripts de las clases y en el texto bíblico. Cada pregunta indica si se responde con las clases, con un versículo, con tu experiencia personal, o si combina varias.</p>
+  </header>
+
+  <!-- ============ CONTROLES ============ -->
+  <div class="no-print sticky top-0 z-10 bg-paper border-b border-neutral-200 py-4 mb-4">
+    <input type="search" id="search" placeholder="Buscar en preguntas y respuestas…" aria-label="Buscar"
+      class="w-full px-3 py-2 rounded-md border border-neutral-300 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-ochre">
+    <div class="flex flex-wrap items-center gap-2 mt-3 text-xs">
+      <button type="button" class="chip px-3 py-1 rounded-full border border-neutral-300 bg-white" data-filter="all" aria-pressed="true">Todas</button>
+      <button type="button" class="chip px-3 py-1 rounded-full border border-neutral-300 bg-white" data-filter="clases" aria-pressed="false">En las clases</button>
+      <button type="button" class="chip px-3 py-1 rounded-full border border-neutral-300 bg-white" data-filter="versiculo" aria-pressed="false">Versículo</button>
+      <button type="button" class="chip px-3 py-1 rounded-full border border-neutral-300 bg-white" data-filter="personal" aria-pressed="false">Personal</button>
+      <button type="button" class="chip px-3 py-1 rounded-full border border-neutral-300 bg-white" data-filter="mixta" aria-pressed="false">Mixta</button>
+      <span class="flex-1"></span>
+      <button type="button" id="expandAll" class="px-3 py-1 rounded-full border border-neutral-300 bg-white">Mostrar respuestas</button>
+      <button type="button" id="collapseAll" class="px-3 py-1 rounded-full border border-neutral-300 bg-white">Ocultar respuestas</button>
+    </div>
+  </div>
+
+  <main id="list"></main>
+  <p id="empty" class="hidden text-sm text-neutral-500 py-10">No hay preguntas que coincidan.</p>
+
+  <footer class="no-print mt-12 pt-4 border-t border-neutral-200 text-xs text-neutral-500 space-y-1">
+    <p><span class="font-semibold text-ink">Tipos:</span> En las clases = la respuesta está en los transcripts. Versículo = se responde con el texto bíblico. Personal = depende de tu experiencia. Mixta = combina dos o más.</p>
+    <p><span class="font-semibold text-ink">Referencias:</span> <code>S5/03</code> = Semana 5, clase 3.</p>
+  </footer>
+</div>
+
+<script>
+  const TYPE_LABEL = {
+    clases: "En las clases",
+    versiculo: "Versículo",
+    personal: "Personal",
+    mixta: "Mixta"
+  };
+
+  const TYPE_COLOR = {
+    clases: "text-ochre border-ochre",
+    versiculo: "text-slate-600 border-slate-500",
+    personal: "text-stone-500 border-stone-400",
+    mixta: "text-ochredeep border-ochredeep"
+  };
+
+  const SECTIONS = [
+    { from: 1, to: 12, title: "Preguntas 1–12" },
+    { from: 13, to: 21, title: "Preguntas 13–21" },
+    { from: 22, to: 28, title: "Preguntas 22–28" },
+    { from: 29, to: 36, title: "Preguntas 29–36" },
+    { from: 37, to: 46, title: "Preguntas 37–46" },
+    { from: 47, to: 59, title: "Preguntas 47–59" }
+  ];
+
+  const ITEMS = [
+    { n: 1, type: "personal", q: "¿Cuál es su salmo favorito? ¿Por qué?",
+      a: `<p>Es una respuesta personal. Escribe tu salmo y tu razón.</p>` },
+
+    { n: 2, type: "personal", q: "¿Cuándo lee un salmo se le facilita expresar sus sentimientos? Explique.",
+      a: `<p>Es una respuesta personal. Describe tu propia experiencia al leer un salmo.</p>` },
+
+    { n: 3, type: "clases", q: "¿Qué significa la palabra salmos?",
+      a: `<p><strong>Mismar</strong> (una de las palabras que traducen «salmo»): canto o composición cantada con acompañamiento de un instrumento punteado. <span class="note">S2/02</span></p>` },
+
+    { n: 4, type: "clases", q: "¿Fue el nombre original del libro? Explique.",
+      a: `<p><strong>No.</strong> El título hebreo es <em>Tehilim</em> (transcrito «tejilim»), que significa «alabanzas». <span class="note">S5/03</span></p>` },
+
+    { n: 5, type: "clases", q: "Nombre cuatro autores de los salmos.",
+      a: `<ul>
+        <li>David (73 salmos)</li>
+        <li>Salomón (Sal 72 y 127)</li>
+        <li>Asaf (12 salmos)</li>
+        <li>Hijos de Coré (12 salmos)</li>
+      </ul>
+      <p class="note">También se mencionan Moisés, Hemán y Etán. S1/02</p>` },
+
+    { n: 6, type: "mixta", q: "Podemos identificar fácilmente los autores y hechos históricos por los datos descritos en el salmo. Anote tres salmos relacionados con algún hecho histórico, busque la cita del evento o situación, y diga cómo se conecta con el salmo.",
+      a: `<ul>
+        <li><strong>Salmo 18</strong> (autor: David). Hecho: Dios lo libró de Saúl y de todos sus enemigos (según la superscripción; ver también 2 Sam 22). Conexión: el salmista describe el peligro de muerte y cómo Dios lo rescata. <span class="note">S5/02, S5/03</span></li>
+        <li><strong>Salmo 114</strong> (autor no indicado en la clase). Hecho: la salida de Egipto y el mar que huye ante el pueblo (Éxodo). Conexión: el salmo recuerda la liberación como motivo de celebración. <span class="note">S6/02</span></li>
+        <li><strong>Salmo 105</strong> (autor no indicado en la clase). Hecho: el éxodo de Egipto (plagas, Moisés, salida con gozo). Conexión: resume la historia para transmitirla de generación en generación. <span class="note">S6/01, S6/02</span></li>
+      </ul>` },
+
+    { n: 7, type: "clases", q: "Escriba tres usos importantes de los salmos.",
+      a: `<ul>
+        <li>Expresar sentimientos y abrir el corazón a Dios. <span class="note">S3/05</span></li>
+        <li>Transmitir la historia y la fe de generación en generación. <span class="note">S1/02</span></li>
+        <li>Alabar y dar gracias a Dios. <span class="note">S3/05, S5/01</span></li>
+      </ul>` },
+
+    { n: 8, type: "personal", q: "¿Considera que con música se expresan mejor los sentimientos de los salmos? Explique.",
+      a: `<p>Es tu opinión. La clase sostiene que la música ayuda a exteriorizar emociones <span class="note">(S2/02)</span> y que cantar los salmos produce un efecto tranquilizador <span class="note">(S3/05)</span>, pero tu respuesta debe ser tuya.</p>` },
+
+    { n: 9, type: "personal", q: "Anote dos características del libro de Salmos que identificó al leerlo.",
+      a: `<p>Depende de tu lectura. Ejemplos que aparecen en las clases: son 150 textos, tienen poesía con acrósticos y paralelismos, y están divididos en cinco libros.</p>` },
+
+    { n: 10, type: "clases", q: "¿Cuál es el propósito de las inscripciones o notas aclaratorias al principio de la mayoría de los salmos?",
+      a: `<p>Indicar <strong>cómo cantarlo o interpretarlo</strong>: melodía, instrumento, ocasión, autor o tipo de salmo. <span class="note">S2/01</span></p>` },
+
+    { n: 11, type: "clases", q: "Explique el valor del título en los salmos.",
+      a: `<p>Le dice a quien canta cómo debe hacerlo, con qué melodía o instrumento, quién lo escribió o interpretó y en qué ocasión. <span class="note">S2/01</span></p>
+      <p class="note">Si tu manual se refiere al título como nombre de Dios, ver S3/02: el título habla de la función, y el nombre, de la persona.</p>` },
+
+    { n: 12, type: "clases", q: "Nombre tres instrumentos usados en la alabanza de Israel.",
+      a: `<ul>
+        <li><strong>Cuerda:</strong> arpa, lira o salterio</li>
+        <li><strong>Percusión:</strong> tamboril o pandero</li>
+        <li><strong>Viento:</strong> flautas o trompetas</li>
+      </ul><p class="note">S3/05</p>` },
+
+    { n: 13, type: "clases", q: "¿En qué difiere la poesía bíblica de la que conocemos?",
+      a: `<ul>
+        <li>Usa <strong>paralelismos</strong> en lugar de rima.</li>
+        <li>Los <strong>acrósticos</strong> son letras del alfabeto hebreo al inicio de cada verso, no palabras escritas en vertical como en español.</li>
+        <li>Usa lenguaje figurado: metáforas, símiles e imágenes.</li>
+      </ul><p class="note">S1/01, S1/02, S2/04, S2/05</p>` },
+
+    { n: 14, type: "mixta", q: "La poesía hebrea es figurativa, rica en imaginación, símiles, metáforas, hipérboles y personificaciones. Anote cinco ejemplos de cualquiera de las figuras literarias mencionadas.",
+      a: `<ul>
+        <li><strong>a) Metáfora:</strong> «Fuego consumirá delante de él» (Sal 50:3). <span class="note">La clase lo cita como Sal 18:3; el texto corresponde al 50:3.</span></li>
+        <li><strong>b) Metáfora:</strong> «voz de Jehová que quiebra los cedros» (Sal 29:5).</li>
+        <li><strong>c) Metáfora:</strong> «engaña como navaja afilada» (Sal 52:2–4). <span class="note">La clase lo cita como Sal 53; el texto corresponde al 52.</span></li>
+        <li><strong>d) Símil:</strong> «Como el siervo brama por las aguas» (Sal 42:1). <span class="note">S1/02</span></li>
+        <li><strong>e) Personificación:</strong> «Los cielos cuentan la gloria de Dios» (Sal 19:1). <span class="note">S5/05</span></li>
+      </ul>` },
+
+    { n: 15, type: "personal", q: "¿Considera que el libro de Salmos también es Palabra de Dios? Explique.",
+      a: `<p>Es tu creencia. La clase sostiene que los salmos son Palabra de Dios porque sus autores fueron inspirados por el Espíritu (2 Sam 23:2) y porque Dios habla a través de ellos a los abatidos. <span class="note">S3/05</span></p>` },
+
+    { n: 16, type: "clases", q: "¿Qué referencias del Nuevo Testamento sugieren que los salmos se cantaban en la iglesia primitiva?",
+      a: `<p>En las clases solo aparece <strong>Mateo 26:30</strong>, donde se entonan salmos al final de la cena. <span class="note">S6/03</span></p>
+      <p class="note">Hechos 4:25 y Hebreos 4:7 se citan para la autoría de los Sal 2 y 95, no para el canto. S1/02. Si tu manual pide más referencias, eso no aparece en las clases.</p>` },
+
+    { n: 17, type: "clases", q: "¿En cuántos libros está dividido el libro de los Salmos? Explique. ¿En qué se diferencian?",
+      a: `<p><strong>Cinco libros.</strong></p>
+      <ul>
+        <li><strong>Libro 1 (Sal 1–41):</strong> David. Personal. Predomina «Jehová» (272 veces).</li>
+        <li><strong>Libro 2 (Sal 42–72):</strong> hijos de Coré, Asaf y Salomón. Nacional, con deseo de la presencia de Dios en el templo. Predomina «Elohim» (164 veces) sobre «Jehová» (30).</li>
+        <li><strong>Libro 3 (Sal 73–89):</strong> Asaf. Cantos nacionales e históricos; Dios como pastor y juez.</li>
+        <li><strong>Libro 4 (Sal 90–106):</strong> Moisés. Más litúrgico, centrado en el orden del culto. Predomina «Jehová».</li>
+        <li><strong>Libro 5 (Sal 107–150):</strong> alabanza, cantos graduales y halel, culto público.</li>
+      </ul>
+      <p class="note">S3/03, S3/04, S4/01, S4/02, S4/03</p>` },
+
+    { n: 18, type: "clases", q: "¿Cómo concluye cada una de estas divisiones?",
+      a: `<p>Cada división termina con una <strong>doxología</strong>. <span class="note">S3/04</span></p>` },
+
+    { n: 19, type: "clases", q: "Anote el significado de doxología.",
+      a: `<p>«Palabra de gloria» o «palabra de alabanza»: <em>doxa</em> (gloria) + <em>logía</em> (palabra). Es una expresión breve de alabanza al final del salmo. <span class="note">S3/03</span></p>` },
+
+    { n: 20, type: "versiculo", q: "Busque un versículo o salmo que sea una doxología.",
+      a: `<ul>
+        <li><strong>Sal 41:13</strong>: «Bendito sea Jehová, el Dios de Israel, por los siglos de los siglos. Amén, y amén.» Cierra el libro 1. <span class="note">S3/03</span></li>
+        <li><strong>Sal 150</strong>: doxología completa que cierra el libro 5 y el salterio. <span class="note">S3/04</span></li>
+      </ul>
+      <p class="note">Otros cierres de libro (no citados en la clase): 72:18–19, 89:52, 106:48.</p>` },
+
+    { n: 21, type: "personal", q: "Si pudiera clasificar el libro de Salmos en cuatro temas, ¿cuáles serían?",
+      a: `<p>Es tu elección. Las clases ofrecen categorías que puedes usar: alabanza, acción de gracias, celebración, instrucción, imprecatorios, históricos, litúrgicos, graduales y aleluya.</p>` },
+
+    { n: 22, type: "personal", q: "La última vez que agradeció por un favor, ¿qué dijo?",
+      a: `<p>Es una respuesta personal.</p>` },
+
+    { n: 23, type: "personal", q: "La última vez que alguien alabó a alguien, ¿cómo lo hizo?",
+      a: `<p>Es una respuesta personal.</p>` },
+
+    { n: 24, type: "personal", q: "La última vez que alguien le dio las gracias, ¿qué le dijo?",
+      a: `<p>Es una respuesta personal.</p>` },
+
+    { n: 25, type: "clases", q: "¿Cuál es la diferencia entre una acción de gratitud y una alabanza?",
+      a: `<ul>
+        <li><strong>Acción de gracias:</strong> agradecer lo que Dios <em>hizo</em> por ti.</li>
+        <li><strong>Alabanza:</strong> exaltar lo que Dios <em>es</em>, sus virtudes.</li>
+      </ul><p class="note">S5/01, S5/05</p>` },
+
+    { n: 26, type: "clases", q: "Enumere algunas virtudes de Dios.",
+      a: `<p>Bueno, maravilloso, santo, poderoso, amoroso, eterno o perdurable. <span class="note">S5/01, S3/02</span></p>` },
+
+    { n: 27, type: "clases", q: "¿Qué es la alabanza?",
+      a: `<p>«La acción de contar las virtudes de Dios.» <span class="note">S5/03</span></p>` },
+
+    { n: 28, type: "versiculo", q: "El Salmo 136 es de alabanza. Léalo y diga su propósito principal. a) ¿Qué característica tiene la estructura de este salmo? b) ¿Qué propósito tendrá esa estructura? c) ¿Dónde comienza la alabanza? d) De acuerdo con los versículos 1 al 3 y 26, ¿por qué alabamos a Jehová? e) ¿Por qué los versos 4 al 9 ofrecen alabanza a Jehová? f) ¿Qué motiva la alabanza a Jehová en los versos 10 al 16? g) ¿Qué parte de la historia de Israel motiva a que Dios sea alabado en los versos 17 al 22? h) ¿Por qué los versos 23 al 25 alaban a Jehová?",
+      a: `<ul>
+        <li><strong>a)</strong> Un estribillo repetido después de cada versículo: «porque para siempre es su misericordia».</li>
+        <li><strong>b)</strong> Enfatizar la misericordia de Dios y permitir que el pueblo responda en coro.</li>
+        <li><strong>c)</strong> Comienza en el v. 1 con un imperativo seguido de su explicación («Alabad a Jehová porque es bueno»). <span class="note">S5/04</span></li>
+        <li><strong>d)</strong> Porque Dios es bueno, es Dios de dioses y Señor de señores (vv. 1–3), y porque su misericordia es para siempre (v. 26).</li>
+        <li><strong>e)</strong> Porque Dios hizo grandes maravillas en la creación: los cielos, la tierra sobre las aguas y las lumbreras. <span class="note">S5/05</span></li>
+        <li><strong>f)</strong> La liberación de Egipto: las plagas, el mar y el desierto. <span class="note">S6/01</span></li>
+        <li><strong>g)</strong> Las victorias sobre reyes (Sehón y Og) y la entrega de la tierra como herencia a Israel. <span class="note">S6/01</span></li>
+        <li><strong>h)</strong> Porque Dios se acordó del pueblo en su humillación, lo libró de sus enemigos y da alimento a todo ser viviente. <span class="note">S6/01, S5/05</span></li>
+      </ul>` },
+
+    { n: 29, type: "mixta", q: "¿Los días de fiesta tienen un alcance religioso? ¿Qué podría hacer la iglesia para convertir aunque sea uno en una gran celebración para el Rey de Reyes?",
+      a: `<p><strong>Primera parte:</strong> sí. El calendario religioso de Israel estaba ligado a la agricultura y se celebraba en Jerusalén para recordar lo que Dios había hecho. <span class="note">S6/01</span></p>
+      <p><strong>Segunda parte:</strong> es tu propuesta, con tus ideas para tu iglesia.</p>` },
+
+    { n: 30, type: "mixta", q: "Salmo 50:23: «El que ofrece sacrificio de alabanza me honrará…». ¿Qué entiende? ¿Es correcto usar la expresión resaltada? ¿Por qué?",
+      a: `<p><strong>Sí, es correcto.</strong> «Sacrificio de alabanza» es alabar a Dios aunque estés en dificultades. Es una expresión bíblica (Heb 13:15, citada en la clase). <span class="note">S6/01</span></p>
+      <p>Es una expresión figurada: el sacrificio que se ofrece es la alabanza, no un animal. La clase explica que en el culto el sacrificio fue reemplazado por Jesucristo. <span class="note">S4/02</span></p>` },
+
+    { n: 31, type: "versiculo", q: "¿Qué hay en los Salmos 47 y 90 respecto a Dios que le hará batir las manos, aclamar con júbilo y alabar con su corazón?",
+      a: `<ul>
+        <li><strong>Sal 47:</strong> Dios es rey grande que reina sobre todas las naciones (vv. 2, 7–8). <span class="note">S6/01</span></li>
+        <li><strong>Sal 90:</strong> Dios es eterno y refugio de generación en generación (vv. 1–2). <span class="note">S4/03</span></li>
+      </ul>` },
+
+    { n: 32, type: "personal", q: "¿Qué modelos de alabanza y adoración de los salmos puede adoptar en su vida para enriquecer su relación con Dios?",
+      a: `<p>Es tu respuesta. Modelos que aparecen en las clases:</p>
+      <ul>
+        <li>Cantar un «cántico nuevo», como en el Sal 96. <span class="note">S5/04</span></li>
+        <li>Alabar sin hablar de ti mismo. <span class="note">S5/03</span></li>
+        <li>Usar un salmo como oración o canto (ej. Sal 31, 103). <span class="note">S5/04</span></li>
+        <li>Escribir tus propios salmos. <span class="note">S4/03</span></li>
+      </ul>` },
+
+    { n: 33, type: "personal", q: "Busque un salmo que considere didáctico y explique por qué lo es.",
+      a: `<p>Es tu elección. Ejemplo de la clase: el <strong>Sal 49</strong> es un «discurso didáctico, al estilo de Proverbios», que invita a no confiar en las riquezas. <span class="note">S4/01</span></p>` },
+
+    { n: 34, type: "mixta", q: "Cite otros dos salmos didácticos que traten el mismo asunto.",
+      a: `<p>Sobre riquezas y la prosperidad de los impíos:</p>
+      <ul>
+        <li><strong>Sal 73</strong>: la envidia del salmista ante los impíos que prosperan. <span class="note">S4/02</span></li>
+        <li><strong>Sal 37</strong>: contraste entre justos y malos. <span class="note">S3/01</span></li>
+      </ul>` },
+
+    { n: 35, type: "mixta", q: "¿Qué sugieren los Salmos 3, 10, 34 y 37 para librarnos del temor, la ansiedad, el odio y los celos?",
+      a: `<ul>
+        <li><strong>Sal 3:</strong> confiar en Dios ante los enemigos, y clamar a él. <span class="note">S3/01</span></li>
+        <li><strong>Sal 37:1:</strong> «No te impacientes a causa de los malignos, ni tengas envidia de los que hacen maldad.»</li>
+        <li><strong>Sal 34:4:</strong> «Busqué a Jehová, y él me oyó, y me libró de todos mis temores.»</li>
+        <li><strong>Sal 10:</strong> contrasta a los justos y los malos. <span class="note">S3/01</span></li>
+      </ul>
+      <p>Mensaje común: confiar y clamar a Dios, no envidiar a quien hace el mal, y saber que Dios escucha al justo.</p>` },
+
+    { n: 36, type: "mixta", q: "¿Los salmos de instrucción tienen los mismos dos componentes de los de alabanza, es decir, el imperativo y explicativo? Si es así, busque un salmo que compruebe su respuesta.",
+      a: `<p><strong>Sí.</strong> Ejemplo: <strong>Sal 78:1–8</strong>. El imperativo es «Pueblo mío, escucha las palabras de mi boca». El explicativo es la razón: que la generación venidera confíe en Dios y no olvide sus proezas (vv. 7–8). <span class="note">S6/04</span></p>` },
+
+    { n: 37, type: "clases", q: "Anote el significado de imprecar.",
+      a: `<p>«Proferir palabras que expresan el vivo deseo de que alguien sufra mal o daño.» <span class="note">S7/02</span></p>` },
+
+    { n: 38, type: "personal", q: "Cuando ora, ¿le cuenta a Dios sus problemas? ¿Tiene confianza para decirle lo que siente, incluso sus sentimientos negativos hacia él? ¿Cómo lo hace?",
+      a: `<p>Es una respuesta personal.</p>` },
+
+    { n: 39, type: "personal", q: "¿Ha tenido una actitud quejumbrosa que cambió mientras oraba? ¿A qué se debió ese cambio?",
+      a: `<p>Es una respuesta personal.</p>` },
+
+    { n: 40, type: "personal", q: "¿Han tratado de sabotearlo? ¿Conoce a alguien que quiera verlo caer? Escriba cuáles serían sus sentimientos y lo que más anhelaría para esas personas.",
+      a: `<p>Es una respuesta personal.</p>` },
+
+    { n: 41, type: "personal", q: "En ese momento en que todo andaba mal en su vida, ¿pensó en orar un salmo? Explique por qué y cuál fue el resultado.",
+      a: `<p>Es una respuesta personal.</p>` },
+
+    { n: 42, type: "versiculo", q: "Lea el Salmo 72. Según los versículos 12 al 14, ¿a quiénes ayuda el Rey justo y qué hará por ellos?",
+      a: `<ul>
+        <li><strong>A quiénes:</strong> al pobre y al menesteroso, y al que no tiene quien le socorra.</li>
+        <li><strong>Qué hará:</strong> librará su alma del engaño y de la violencia; su sangre será preciosa delante de él.</li>
+      </ul><p class="note">La clase presenta el Sal 72 como oración por el rey (S6/02). El contenido de los vv. 12–14 viene del texto bíblico.</p>` },
+
+    { n: 43, type: "clases", q: "Los Salmos 42 y 43 comparten el mismo tema… Después de leer estos dos salmos, ¿identifica cuál es la súplica del salmista?",
+      a: `<p>El salmista pide ser juzgado y defendido («Júzgame, oh Dios, y defiende mi causa»), ser librado de la gente impía y del hombre engañoso, y ser guiado a la presencia de Dios, a su santo monte. <span class="note">S4/01</span></p>` },
+
+    { n: 44, type: "clases", q: "¿Cuál es la razón de esa necesidad?",
+      a: `<p>El salmista se siente rechazado y oprimido: «¿Por qué me has desechado? ¿Por qué andaré enlutado por la opresión del enemigo?» (Sal 43:2). Además, tiene la necesidad de volver a la presencia de Dios y congregarse en el templo. <span class="note">S4/01</span></p>` },
+
+    { n: 45, type: "versiculo", q: "¿Con qué pregunta describe la actitud del pagano?",
+      a: `<p>Con la pregunta: <strong>«¿Dónde está tu Dios?»</strong> (Sal 42:3 y 42:10). Viene del texto bíblico; no aparece en las clases.</p>` },
+
+    { n: 46, type: "versiculo", q: "Anote las respuestas del salmista a las súplicas:",
+      a: `<p>El salmista se responde a sí mismo: <strong>«Espera en Dios, pues aún he de alabarle»</strong> (Sal 42:5, 11; 43:5). Viene del texto bíblico.</p>` },
+
+    { n: 47, type: "mixta", q: "El Salmo 94 es un salmo de súplica a Dios por justicia y una denuncia contra los jueces injustos. ¿Cuál es el significado de venganza? (Revise Jeremías 51:56)",
+      a: `<p>En Jer 51:56, «Jehová es Dios de retribuciones, el cual ciertamente dará el pago». Venganza, en este sentido, es el pago justo de Dios, no una venganza personal.</p>
+      <p class="note">La clase explica que los salmos imprecatorios reclaman justicia frente a quienes nos hacen daño. S7/03</p>` },
+
+    { n: 48, type: "versiculo", q: "Ponga en sus palabras las siguientes porciones bíblicas: «Jehová, Dios de las venganzas…»; «¡Entended, necios del pueblo!…»; «…El hombre a quien Tú, Jah, corriges…»; «Si no me ayudara Jehová, pronto moraría mi alma en el silencio.» Salmo 94:17",
+      a: `<p>Escríbelo con tus palabras. Pistas:</p>
+      <ul>
+        <li><strong>«Jehová, Dios de las venganzas»:</strong> Dios hace justicia y castiga a quienes obran mal.</li>
+        <li><strong>«¡Entended, necios del pueblo!»:</strong> un llamado a quienes no entienden a reflexionar.</li>
+        <li><strong>«El hombre a quien Tú, Jah, corriges»:</strong> Dios disciplina a quien ama (Sal 94:12).</li>
+        <li><strong>«Si no me ayudara Jehová…»:</strong> sin la ayuda de Dios, el alma caería en el silencio (Sal 94:17).</li>
+      </ul>` },
+
+    { n: 49, type: "personal", q: "Identifique y escriba algunos momentos oscuros que nuestro país atravesó o atravesará.",
+      a: `<p>Depende de tu contexto. Es una respuesta personal.</p>` },
+
+    { n: 50, type: "personal", q: "Examine un problema que su familia, iglesia, grupo o país vive. ¿Cómo manifiesta su queja?",
+      a: `<p>Es una respuesta personal.</p>` },
+
+    { n: 51, type: "personal", q: "¿Con qué términos concretos expresa sus gritos de auxilio?",
+      a: `<p>Es una respuesta personal.</p>` },
+
+    { n: 52, type: "personal", q: "¿Confía en que será libre?",
+      a: `<p>Es una respuesta personal.</p>` },
+
+    { n: 53, type: "mixta", q: "Busque un salmo que represente el proceso de liberación y diga por qué lo es.",
+      a: `<p>Es tu elección. Ejemplos de la clase:</p>
+      <ul>
+        <li><strong>Sal 18:</strong> David agradece su liberación de Saúl y de la muerte. <span class="note">S5/02, S5/03</span></li>
+        <li><strong>Sal 114:</strong> la salida de Egipto como liberación del pueblo. <span class="note">S6/02</span></li>
+      </ul>` },
+
+    { n: 54, type: "personal", q: "Al hacer una retrospectiva del estudio de los salmos, ¿qué verdades le han ayudado y cómo lo han hecho?",
+      a: `<p>Es una respuesta personal.</p>` },
+
+    { n: 55, type: "personal", q: "¿Qué está haciendo Dios en usted? De ese proceso, ¿qué debe incluir en su estilo de vida?",
+      a: `<p>Es una respuesta personal.</p>` },
+
+    { n: 56, type: "personal", q: "¿Qué hizo Dios por usted, su familia, su iglesia o su nación que puede ser parte de su testimonio de la fidelidad del Señor?",
+      a: `<p>Es una respuesta personal.</p>` },
+
+    { n: 57, type: "personal", q: "¿Cómo le ayudó a reconocer sus errores el estudio del libro de los Salmos?",
+      a: `<p>Es una respuesta personal.</p>` },
+
+    { n: 58, type: "mixta", q: "¿Cómo lo guardó del pecado deliberado?",
+      a: `<p>Sal 19:13 pide a Dios que preserve de las soberbias y de la gran rebelión: «Preserva también a tu siervo de las soberbias; que no se enseñoreen de mí». Cómo lo hiciste tú es una respuesta personal.</p>` },
+
+    { n: 59, type: "mixta", q: "Con el Salmo 125 como modelo, escriba un canto de testimonio de la fidelidad de Dios.",
+      a: `<p>Modelo: el Sal 125 (no aparece en las clases). Compara a quienes confían en Jehová con el monte de Sion, que no será movido (v. 1). Tu canto es una creación personal, inspirada en ese modelo.</p>` }
+  ];
+
+  const list = document.getElementById("list");
+  const searchInput = document.getElementById("search");
+  const emptyMsg = document.getElementById("empty");
+  let currentFilter = "all";
+
+  function stripTags(html) {
+    const d = document.createElement("div");
+    d.innerHTML = html;
+    return d.textContent || "";
+  }
+
+  function setOpen(btn, ans, open) {
+    ans.classList.toggle("open", open);
+    btn.textContent = open ? "Ocultar respuesta" : "Ver respuesta";
+    btn.setAttribute("aria-expanded", String(open));
+  }
+
+  function render() {
+    list.innerHTML = "";
+    SECTIONS.forEach(sec => {
+      const items = ITEMS.filter(it => it.n >= sec.from && it.n <= sec.to);
+      const title = document.createElement("h2");
+      title.className = "label text-neutral-500 mt-10 mb-3";
+      title.textContent = sec.title;
+      title.dataset.section = "1";
+      list.appendChild(title);
+
+      items.forEach(it => {
+        const card = document.createElement("article");
+        card.className = "card bg-white border border-neutral-200 rounded-md px-5 py-4 mb-3";
+        card.dataset.type = it.type;
+        card.dataset.text = (it.q + " " + stripTags(it.a)).toLowerCase();
+
+        const meta = document.createElement("div");
+        meta.className = "flex items-center gap-3 mb-2";
+        const num = document.createElement("span");
+        num.className = "font-serif font-bold text-ochre";
+        num.textContent = "#" + it.n;
+        const tag = document.createElement("span");
+        tag.className = "label border rounded-full px-2 py-0.5 " + TYPE_COLOR[it.type];
+        tag.textContent = TYPE_LABEL[it.type];
+        meta.append(num, tag);
+
+        const q = document.createElement("p");
+        q.className = "font-serif text-base leading-relaxed text-ink";
+        q.textContent = it.q;
+
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "no-print mt-2 text-xs text-ochredeep underline underline-offset-4";
+        btn.textContent = "Ver respuesta";
+        btn.setAttribute("aria-expanded", "false");
+
+        const ans = document.createElement("div");
+        ans.className = "answer text-sm leading-relaxed text-neutral-700 border-t border-dashed border-neutral-300 mt-3 pt-3";
+        ans.innerHTML = it.a;
+
+        btn.addEventListener("click", () => setOpen(btn, ans, !ans.classList.contains("open")));
+
+        card.append(meta, q, btn, ans);
+        list.appendChild(card);
+      });
+    });
+    applyFilters();
+  }
+
+  function applyFilters() {
+    const term = searchInput.value.trim().toLowerCase();
+    let visible = 0;
+    document.querySelectorAll("article.card").forEach(card => {
+      const okType = currentFilter === "all" || card.dataset.type === currentFilter;
+      const okText = !term || card.dataset.text.includes(term);
+      const show = okType && okText;
+      card.classList.toggle("hidden", !show);
+      if (show) visible++;
+    });
+    document.querySelectorAll("[data-section]").forEach(t => {
+      let next = t.nextElementSibling;
+      let any = false;
+      while (next && !next.dataset.section) {
+        if (next.classList.contains("card") && !next.classList.contains("hidden")) any = true;
+        next = next.nextElementSibling;
+      }
+      t.classList.toggle("hidden", !any);
+    });
+    emptyMsg.classList.toggle("hidden", visible > 0);
+  }
+
+  document.querySelectorAll("[data-filter]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      currentFilter = btn.dataset.filter;
+      document.querySelectorAll("[data-filter]").forEach(b =>
+        b.setAttribute("aria-pressed", String(b === btn)));
+      applyFilters();
+    });
+  });
+
+  searchInput.addEventListener("input", applyFilters);
+
+  function setAll(open) {
+    document.querySelectorAll("article.card").forEach(card => {
+      setOpen(card.querySelector("button"), card.querySelector(".answer"), open);
+    });
+  }
+  document.getElementById("expandAll").addEventListener("click", () => setAll(true));
+  document.getElementById("collapseAll").addEventListener("click", () => setAll(false));
+
+  render();
+</script>
+<script src="nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Salterio en cinco libros</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap" rel="stylesheet">
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          paper: '#faf9f7',
+          ink: '#1e293b',
+          ochre: '#a16207',
+          ochredeep: '#854d0e'
+        },
+        fontFamily: {
+          serif: ['"Source Serif 4"', 'Georgia', 'serif'],
+          sans: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif']
+        }
+      }
+    }
+  }
+</script>
+<style>
+  body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .label {
+    font-size: 0.625rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  @media print {
+    .no-print { display: none; }
+    body { background: #ffffff; }
+  }
+</style>
+<link rel="stylesheet" href="nav.css">
+</head>
+<body class="bg-paper text-ink font-sans antialiased">
+<div id="nav-root"></div>
+
+<div class="max-w-[1200px] mx-auto px-8 py-10">
+
+  <!-- ============ ENCABEZADO ============ -->
+  <header class="border-b border-neutral-200 pb-6 mb-8">
+    <p class="label text-ochre mb-3">Curso bíblico &middot; Mapa general</p>
+    <h1 class="font-serif font-bold text-4xl md:text-5xl leading-tight text-ink">El Salterio en cinco libros</h1>
+    <p class="font-serif italic text-lg text-neutral-600 mt-2">150 salmos, cinco libros, una sola alabanza</p>
+    <p class="text-sm text-neutral-600 mt-4 max-w-3xl">Cada uno de los cinco libros termina en una <span class="font-semibold text-ink">doxología</span> (del griego <em class="font-serif">doxa</em>, «gloria» + <em class="font-serif">logía</em>, «palabra» o «expresión»): una bendición final que sella cada sección y corona toda la colección.</p>
+  </header>
+
+  <!-- ============ ENCABEZADO DE COLUMNAS ============ -->
+  <div class="hidden md:grid grid-cols-[130px_1fr_1fr_1.25fr_1fr] gap-x-6 pb-2 mb-0 border-b border-neutral-300">
+    <div class="label text-neutral-500">Libro</div>
+    <div class="label text-neutral-500">Autores</div>
+    <div class="label text-neutral-500">Nombre divino</div>
+    <div class="label text-neutral-500">Carácter y temas</div>
+    <div class="label text-neutral-500">Cierre</div>
+  </div>
+
+  <!-- ============ LIBRO 1 ============ -->
+  <section class="grid md:grid-cols-[130px_1fr_1fr_1.25fr_1fr] gap-x-6 gap-y-3 py-6 border-b border-neutral-200">
+    <div>
+      <div class="font-serif font-bold text-4xl text-ochre leading-none">I</div>
+      <div class="font-serif font-semibold text-lg mt-1 leading-tight">Salmos<br>1–41</div>
+    </div>
+    <div class="text-sm leading-relaxed text-neutral-700">
+      <span class="md:hidden label text-neutral-500 block mb-1">Autores</span>
+      David (excepto los Salmos 1, 10 y 33).
+    </div>
+    <div class="text-sm leading-relaxed text-neutral-700">
+      <span class="md:hidden label text-neutral-500 block mb-1">Nombre divino</span>
+      Jehová aparece <span class="font-semibold text-ochredeep">272 veces</span>.
+      <div class="mt-2">
+        <div class="flex items-center gap-1.5">
+          <span class="text-[10px] w-12 text-neutral-500">Jehová</span>
+          <div class="h-2 bg-ochre" style="width:72px"></div>
+          <span class="text-[10px] text-neutral-600">272</span>
+        </div>
+        <div class="flex items-center gap-1.5 mt-0.5">
+          <span class="text-[10px] w-12 text-neutral-500">Elohim</span>
+          <div class="h-2 bg-neutral-300" style="width:0px"></div>
+          <span class="text-[10px] text-neutral-400">—</span>
+        </div>
+      </div>
+    </div>
+    <div class="text-sm leading-relaxed text-neutral-700">
+      <span class="md:hidden label text-neutral-500 block mb-1">Carácter y temas</span>
+      Mayormente espontáneo y personal.
+    </div>
+    <div class="text-sm leading-relaxed text-neutral-700">
+      <span class="md:hidden label text-neutral-500 block mb-1">Cierre</span>
+      Doxología del Salmo 41:13 — <span class="font-serif italic">«Bendito sea Jehová… Amén y amén»</span>.
+    </div>
+  </section>
+
+  <!-- ============ LIBRO 2 ============ -->
+  <section class="grid md:grid-cols-[130px_1fr_1fr_1.25fr_1fr] gap-x-6 gap-y-3 py-6 border-b border-neutral-200">
+    <div>
+      <div class="font-serif font-bold text-4xl text-ochre leading-none">II</div>
+      <div class="font-serif font-semibold text-lg mt-1 leading-tight">Salmos<br>42–72</div>
+    </div>
+    <div class="text-sm leading-relaxed text-neutral-700">
+      <span class="md:hidden label text-neutral-500 block mb-1">Autores</span>
+      Hijos de Coré, Asaf, David, Salomón, anónimos.
+    </div>
+    <div class="text-sm leading-relaxed text-neutral-700">
+      <span class="md:hidden label text-neutral-500 block mb-1">Nombre divino</span>
+      Elohim ~<span class="font-semibold text-ochredeep">164 veces</span> vs. Jehová solo <span class="font-semibold">30</span>.
+      <div class="mt-2">
+        <div class="flex items-center gap-1.5">
+          <span class="text-[10px] w-12 text-neutral-500">Elohim</span>
+          <div class="h-2 bg-ochre" style="width:43px"></div>
+          <span class="text-[10px] text-neutral-600">~164</span>
+        </div>
+        <div class="flex items-center gap-1.5 mt-0.5">
+          <span class="text-[10px] w-12 text-neutral-500">Jehová</span>
+          <div class="h-2 bg-neutral-300" style="width:8px"></div>
+          <span class="text-[10px] text-neutral-600">30</span>
+        </div>
+      </div>
+    </div>
+    <div class="text-sm leading-relaxed text-neutral-700">
+      <span class="md:hidden label text-neutral-500 block mb-1">Carácter y temas</span>
+      Sentimientos nacionales; anhelo del templo y de la presencia de Dios.
+    </div>
+    <div class="text-sm leading-relaxed text-neutral-700">
+      <span class="md:hidden label text-neutral-500 block mb-1">Cierre</span>
+      Doxología al cierre.
+    </div>
+  </section>
+
+  <!-- ============ LIBRO 3 ============ -->
+  <section class="grid md:grid-cols-[130px_1fr_1fr_1.25fr_1fr] gap-x-6 gap-y-3 py-6 border-b border-neutral-200">
+    <div>
+      <div class="font-serif font-bold text-4xl text-ochre leading-none">III</div>
+      <div class="font-serif font-semibold text-lg mt-1 leading-tight">Salmos<br>73–89</div>
+    </div>
+    <div class="text-sm leading-relaxed text-neutral-700">
+      <span class="md:hidden label text-neutral-500 block mb-1">Autores</span>
+      Hijos de Asaf e hijos de Coré (cantores del templo; cf. 2 Crónicas 20:19; Esdras 2:41; Nehemías 7:44).
+    </div>
+    <div class="text-sm leading-relaxed text-neutral-500">
+      <span class="md:hidden label text-neutral-500 block mb-1">Nombre divino</span>
+      <span class="text-neutral-400">—</span>
+    </div>
+    <div class="text-sm leading-relaxed text-neutral-700">
+      <span class="md:hidden label text-neutral-500 block mb-1">Carácter y temas</span>
+      Adoración en el templo: el Salmo 73 (prosperidad de los malvados) y el Salmo 84 (excelencia del templo).
+    </div>
+    <div class="text-sm leading-relaxed text-neutral-700">
+      <span class="md:hidden label text-neutral-500 block mb-1">Cierre</span>
+      Doxología al cierre.
+    </div>
+  </section>
+
+  <!-- ============ LIBRO 4 ============ -->
+  <section class="grid md:grid-cols-[130px_1fr_1fr_1.25fr_1fr] gap-x-6 gap-y-3 py-6 border-b border-neutral-200">
+    <div>
+      <div class="font-serif font-bold text-4xl text-ochre leading-none">IV</div>
+      <div class="font-serif font-semibold text-lg mt-1 leading-tight">Salmos<br>90–106</div>
+    </div>
+    <div class="text-sm leading-relaxed text-neutral-700">
+      <span class="md:hidden label text-neutral-500 block mb-1">Autores</span>
+      Abre con el Salmo 90, «Oración de Moisés, varón de Dios».
+    </div>
+    <div class="text-sm leading-relaxed text-neutral-700">
+      <span class="md:hidden label text-neutral-500 block mb-1">Nombre divino</span>
+      Jehová predomina.
+    </div>
+    <div class="text-sm leading-relaxed text-neutral-700">
+      <span class="md:hidden label text-neutral-500 block mb-1">Carácter y temas</span>
+      Más litúrgicos (liturgia = orden del culto); Salmo 95 (invitación a alabar) y Salmo 97 («Jehová reina»).
+    </div>
+    <div class="text-sm leading-relaxed text-neutral-700">
+      <span class="md:hidden label text-neutral-500 block mb-1">Cierre</span>
+      Doxología al cierre.
+    </div>
+  </section>
+
+  <!-- ============ LIBRO 5 ============ -->
+  <section class="grid md:grid-cols-[130px_1fr_1fr_1.25fr_1fr] gap-x-6 gap-y-3 py-6 border-b border-neutral-300">
+    <div>
+      <div class="font-serif font-bold text-4xl text-ochre leading-none">V</div>
+      <div class="font-serif font-semibold text-lg mt-1 leading-tight">Salmos<br>107–150</div>
+    </div>
+    <div class="text-sm leading-relaxed text-neutral-700">
+      <span class="md:hidden label text-neutral-500 block mb-1">Autores</span>
+      David y otros.
+    </div>
+    <div class="text-sm leading-relaxed text-neutral-500">
+      <span class="md:hidden label text-neutral-500 block mb-1">Nombre divino</span>
+      <span class="text-neutral-400">—</span>
+    </div>
+    <div class="text-sm leading-relaxed text-neutral-700">
+      <span class="md:hidden label text-neutral-500 block mb-1">Carácter y temas</span>
+      Espíritu profundo de adoración para el culto público; contiene los cánticos graduales (120–134) y el Halel (113–118).
+    </div>
+    <div class="text-sm leading-relaxed text-neutral-700">
+      <span class="md:hidden label text-neutral-500 block mb-1">Cierre</span>
+      El Salmo 150 es la doxología final completa de todo el libro.
+    </div>
+  </section>
+
+  <!-- ============ LÍNEA DE TIEMPO ============ -->
+  <section class="mt-10">
+    <p class="label text-neutral-500 mb-4">Composición y compilación &middot; c. 1.000 años</p>
+    <div class="relative h-20">
+      <!-- línea base -->
+      <div class="absolute left-0 right-0 top-9 h-px bg-neutral-300"></div>
+      <!-- edad de oro: siglos X–IX a.C. (~1000–900 a.C.) -->
+      <div class="absolute top-[30px] h-[18px] bg-ochre/20 border-x border-ochre" style="left:41.8%; width:10.5%"></div>
+      <div class="absolute text-center text-[10px] font-semibold text-ochredeep" style="left:41.8%; width:10.5%; top:2px; transform:translateX(0)">Edad de oro</div>
+      <div class="text-center text-[10px] text-neutral-500" style="position:absolute; left:41.8%; width:10.5%; top:52px;">David y Salomón<br>(edad de oro)</div>
+
+      <!-- marcador inicial -->
+      <div class="absolute left-0 top-[33px] w-3 h-3 rounded-full bg-ochre" style="transform:translateX(-6px)"></div>
+      <div class="absolute left-0 top-[52px]" style="transform:translateX(-6px)">
+        <div class="text-xs font-semibold text-ink whitespace-nowrap">c. 1400 a.C.</div>
+        <div class="text-[10px] text-neutral-500">Salmo 90 (Moisés), el más antiguo</div>
+      </div>
+
+      <!-- marcador final -->
+      <div class="absolute right-0 top-[33px] w-3 h-3 rounded-full bg-ink" style="transform:translateX(6px)"></div>
+      <div class="absolute right-0 top-[52px] text-right" style="transform:translateX(6px)">
+        <div class="text-xs font-semibold text-ink whitespace-nowrap">c. 444 a.C.</div>
+        <div class="text-[10px] text-neutral-500">Esdras anexa los Salmos 1 y 119 y cierra la compilación</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ AUTORES ============ -->
+  <section class="mt-10 border-t border-neutral-200 pt-6">
+    <p class="label text-neutral-500 mb-4">Autores del Salterio</p>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-x-10 gap-y-3 text-sm">
+      <div class="flex justify-between border-b border-neutral-200 pb-2 gap-4">
+        <div><span class="font-semibold">David</span><span class="text-neutral-500 text-xs block leading-snug">más los Salmos 2 y 95 (cf. Hechos 4:25; Hebreos 4:7)</span></div>
+        <span class="font-serif font-semibold text-ochre whitespace-nowrap">73 salmos</span>
+      </div>
+      <div class="flex justify-between border-b border-neutral-200 pb-2 gap-4">
+        <span class="font-semibold">Asaf</span>
+        <span class="font-serif font-semibold text-ochre whitespace-nowrap">12 <span class="text-neutral-500 text-xs font-sans font-normal">(73–83)</span></span>
+      </div>
+      <div class="flex justify-between border-b border-neutral-200 pb-2 gap-4">
+        <div><span class="font-semibold">Hijos de Coré</span><span class="text-neutral-500 text-xs block leading-snug">incl. 42, 46, 49, 84, 88</span></div>
+        <span class="font-serif font-semibold text-ochre whitespace-nowrap">12</span>
+      </div>
+      <div class="flex justify-between border-b border-neutral-200 pb-2 gap-4">
+        <span class="font-semibold">Salomón</span>
+        <span class="font-serif font-semibold text-ochre whitespace-nowrap"><span class="text-neutral-500 text-xs font-sans font-normal">Salmos</span> 72 y 127</span>
+      </div>
+      <div class="flex justify-between border-b border-neutral-200 pb-2 gap-4">
+        <span class="font-semibold">Hemán</span>
+        <span class="font-serif font-semibold text-ochre whitespace-nowrap"><span class="text-neutral-500 text-xs font-sans font-normal">Salmo</span> 88</span>
+      </div>
+      <div class="flex justify-between border-b border-neutral-200 pb-2 gap-4">
+        <span class="font-semibold">Etán</span>
+        <span class="font-serif font-semibold text-ochre whitespace-nowrap"><span class="text-neutral-500 text-xs font-sans font-normal">Salmo</span> 89</span>
+      </div>
+      <div class="flex justify-between border-b border-neutral-200 pb-2 gap-4">
+        <span class="font-semibold">Moisés</span>
+        <span class="font-serif font-semibold text-ochre whitespace-nowrap"><span class="text-neutral-500 text-xs font-sans font-normal">Salmo</span> 90</span>
+      </div>
+      <div class="flex justify-between border-b border-neutral-200 pb-2 gap-4">
+        <div><span class="font-semibold">Esdras</span><span class="text-neutral-500 text-xs block leading-snug">compilador final</span></div>
+        <span class="font-serif font-semibold text-ochre whitespace-nowrap"><span class="text-neutral-500 text-xs font-sans font-normal">Salmos</span> 1 y 119</span>
+      </div>
+    </div>
+  </section>
+
+  <footer class="mt-10 pt-4 border-t border-neutral-200 text-xs text-neutral-400 no-print">
+    Cinco libros &middot; cinco doxologías &middot; una sola alabanza, de Moisés a Esdras.
+  </footer>
+
+</div>
+
+<script src="nav.js"></script>
+</body>
+</html>

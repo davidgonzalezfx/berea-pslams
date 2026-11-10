@@ -1,0 +1,21 @@
+/* Menú lateral compartido — Salmos */
+:root { --nav-bg:#f1efea; --nav-line:#e4e3de; --nav-ink:#1e293b; --nav-muted:#6b6b66; --nav-accent:#a16207; --nav-hover:#e9e6df; --nav-w:250px; }
+.sb { position:fixed; top:0; left:0; bottom:0; width:var(--nav-w); background:var(--nav-bg); border-right:1px solid var(--nav-line); padding:28px 20px; overflow-y:auto; z-index:50; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; color:var(--nav-ink); }
+.sb-brand { font-family:"Source Serif 4",Georgia,serif; font-weight:700; font-size:1.1rem; margin-bottom:24px; }
+.sb-label { font-size:.625rem; letter-spacing:.14em; text-transform:uppercase; font-weight:600; color:var(--nav-muted); margin:20px 0 8px; }
+.sb-item { display:flex; gap:10px; padding:8px 10px; border-radius:6px; color:var(--nav-ink); text-decoration:none; font-size:.9rem; line-height:1.3; border:1px solid transparent; }
+.sb-item:hover { background:var(--nav-hover); }
+.sb-item.is-active { background:#fff; border:1px solid var(--nav-line); font-weight:600; }
+.sb-num { color:var(--nav-accent); font-weight:700; min-width:20px; }
+.sb-toggle { display:none; }
+body.has-sb { padding-left:var(--nav-w); }
+.nav-pn { max-width:1000px; margin:0 auto; padding:0 32px 48px; display:flex; justify-content:space-between; gap:16px; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; font-size:.88rem; }
+.nav-pn a { color:var(--nav-accent); text-decoration:none; }
+.nav-pn a:hover { text-decoration:underline; }
+@media (max-width: 800px) {
+  body.has-sb { padding-left:0; }
+  .sb { transform:translateX(-100%); transition:transform .2s; }
+  .sb.is-open { transform:none; box-shadow:0 0 30px rgba(0,0,0,.2); }
+  .sb-toggle { display:block; position:fixed; top:12px; left:12px; z-index:60; padding:6px 12px; border-radius:999px; border:1px solid var(--nav-line); background:#fff; color:var(--nav-ink); font:500 .85rem -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; cursor:pointer; }
+}
+@media print { .sb, .sb-toggle, .nav-pn { display:none !important; } body.has-sb { padding-left:0; } }
